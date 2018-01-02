@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <ul id="menu">
+      <li>
+        <router-link to="/editor" title="MD编辑器" class="ed">
+          <span class="editor"></span>
+        </router-link>
+      </li>
+      <li>
+        <a href="javascript:" title="资料">
+          <span class="nodes"></span>
+        </a>
+      </li>
+
+      <li>
+        <router-link to="/nodes" title="MD编辑器" class="ed">
+          <span class="editor"></span>
+        </router-link>
+      </li>
+    </ul>
+    <div id="main">
+        <router-view></router-view>
+    </div>
+
+  </div>
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+  <script src="../node_modules/vue-router/dist/vue-router.min.js"></script>
+  <script>
+
+
+    //1. 从外部文件中导入组件
+    const editor = require("./editor/editor.js");
+    const nodes = require("./nodes/nodes.js");
+
+
+    // 2. 定义路由
+    const routes = [
+      { path: '/editor', component: editor.Editor },
+      { path: '/nodes', component: nodes.Nodes },
+    ];
+
+    // 3. 创建 router 实例，然后传 `routes` 配置
+    const router = new VueRouter({
+      routes // （缩写）相当于 routes: routes
+    });
+
+    // 4. 创建和挂载根实例。
+    const app = new Vue({
+      router
+    }).$mount('#app')
+
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</body>
+
+</html>

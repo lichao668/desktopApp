@@ -1,0 +1,76 @@
+@charset 'utf-8';
+/* css reset */
+body,ul,ol,h1{padding: 0;margin: 0;}
+html,body,#app{width: 100%;height: 100%;}
+li{list-style: none;}
+
+body {font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;}
+
+.clear:after{content: '';display: block;clear: both;}
+.clear{zoom:1; }
+body,html{position: absolute;top: 0;left: 0; z-index: 10;}
+#menu{width: 40px; background: #42b983; height: 100%; position: fixed;top: 0;left: 0;z-index: 100; text-align: center;padding-top: 32px;}
+#menu>li{margin-bottom: 8px; cursor: pointer;}
+#menu>li span{display: inline-block;width: 32px; height: 32px; }
+#menu>li span:focus{outline: none;}
+#menu .editor{background: url('./image/editor-gray.png');}
+#menu .editor:hover{background:url('./image/editor-white.png');}
+#menu .nodes{background: url('./image/notes-gray.png');}
+#menu .nodes:hover{background:url('./image/notes-white.png'); }
+
+#main{padding:0 10px 0 82px; }
+#main>.editor>textarea.mdInput{ line-height: 1.3em;font-size: 16px; font-family: "Consolas, 'Courier New', monospace"; width: 98%;  min-height:200px; 
+     resize: none;  overflow: hidden;overflow-wrap: normal; }
+#main>.editor>textarea.mdInput:focus,#main>.editor>textarea.mdInput{outline: none; border: none; }
+#main>.editor>.tool{width: 20px; position: fixed;;top: 16px;right: 36px;}
+#main>.editor>.tool>a{display: inline-block;width: 16px;height: 16px; position: relative;}
+#main>.editor>.tool>.previewTool{background: url('./image/preview-gray1.png');}
+#main>.editor>.tool>.previewTool:hover{background: url('./image/preview-gray2.png');}
+#main>.editor>.tool>.saveTool{background: url('./image/save-gray1.png');}
+#main>.editor>.tool>.saveTool:hover{background: url('./image/save-gray2.png');}
+/* 保存弹窗 */
+#main>.editor .saveAlert{width: 300px;padding: 8px 16px; border: 1px solid rgba(0,0,0,.2);border-radius: 6px;
+    box-shadow: 0 3px 9px rgba(0,0,0,.5); position: absolute;left: -350px;top: 0; }
+#main>.editor .saveAlert label{font-size: 14px;color: #333;}
+#main>.editor .saveAlert>.inputBox{ margin-top: 8px;}
+#main>.editor .saveAlert .inputDefault{padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;
+    border: 1px solid #ccc; border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0,0,0,.075);}
+#main>.editor .saveAlert .inputDefault:focus{outline: none;border-color: #66afe9;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #67b168;}
+
+#main>.editor .saveAlert>.btns{text-align: center; margin-top: 20px;}
+#main>.editor .saveAlert button{line-height: 1.42857143; border: 1px solid #ccc;border-radius: 4px;outline: none; 
+    background: #fff;color: #333;cursor: pointer; padding:6px 12px;font-size: 14px;font-weight: 400;}
+#main>.editor .saveAlert .cancelBtn{color: #fff;background-color: #337ab7;border-color: #2e6da4; margin-left: 28px;}
+#main>.editor .saveAlert .cancelBtn:hover{background-color: #286090;border-color: #204d74;}
+#main>.editor .saveAlert .confirmBtn:hover{background-color: #e6e6e6;border-color: #adadad;}
+#main>.editor .saveAlert>.saveAlertTitle{text-align: center;font-size: 18px;line-height: 1.42857143;margin: 0;font-weight:bolder;color: #333;}
+#main>.editor .saveAlert>.check{margin-top: 8px;border-radius: 4px; padding: 0 6px; display: inline-block;}
+#main>.editor .saveAlert .checkbox-inline{vertical-align: middle; cursor: pointer;}
+#main>.editor .saveAlert .checkbox-inline:first-child{margin-right: 20px;}
+/* 输入框架为空时显示状态 */
+#main>.editor .saveAlert .hasErr{border:1px solid #a94442;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;}
+
+/* 行号 */
+#main>.editor>.linenum{width: 40px;min-height:200px;resize: none; overflow-y: hidden;font-size: 16px;line-height: 1.3em;font-family: "Consolas, 'Courier New', monospace";
+    text-align: center; color: #2b91af; border:none;outline: none; position: absolute;top: 10px;left: 40px;}
+#main>.editor>.linenum>li{line-height: 14px;font-size: 14px;}
+
+#main{background: red; height: 100%; overflow-y: scroll; }
+#main>.nodes{background: yellow;height: 100%; }
+#main>.nodes{height: 1200px; }
+
+
+
+
+
+
+
+
+/* Vue 进入离开动画 */
+.slide-fade-enter-active {transition: all .3s ease;}
+.slide-fade-leave-active {transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);}
+.slide-fade-enter, .slide-fade-leave-to {transform: translateX(10px);opacity: 0;}
+
+
+
+
