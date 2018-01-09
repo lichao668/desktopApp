@@ -4,7 +4,7 @@ body,ul,ol,h1{padding: 0;margin: 0;}
 html,body,#app{width: 100%;height: 100%;}
 li{list-style: none;}
 
-body {font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;}
+body {overflow: hidden; font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;}
 
 .clear:after{content: '';display: block;clear: both;}
 .clear{zoom:1; }
@@ -18,25 +18,35 @@ body,html{position: absolute;top: 0;left: 0; z-index: 10;}
 #menu .nodes{background: url('./image/notes-gray.png');}
 #menu .nodes:hover{background:url('./image/notes-white.png'); }
 
-#main{padding:0 10px 0 82px; }
-#main>.editor>textarea.mdInput{ line-height: 1.3em;font-size: 16px; font-family: "Consolas, 'Courier New', monospace"; width: 98%;  min-height:200px; 
+#main{padding:0 10px 0 50px; height: 100%; }
+#main>.editor{overflow: auto; height: 100%;width: 100%;position: relative;}
+#main>.editor>textarea.mdInput{line-height: 1.3em; font-size: 16px; padding-left: 60px;
+    font-family: "Consolas, 'Courier New', monospace";   min-height:90%; min-width: 80%;
      resize: none;  overflow: hidden;overflow-wrap: normal; }
 #main>.editor>textarea.mdInput:focus,#main>.editor>textarea.mdInput{outline: none; border: none; }
-#main>.editor>.tool{width: 20px; position: fixed;;top: 16px;right: 36px;}
+
+#main>.editor>.tool{width: 80px; position: fixed; ;top: 16px;right: 20px; text-align: center; border: 1px solid rgba(214, 214, 216, 0.38); 
+    border-radius: 3px; box-shadow: 0 0 5px rgba(214, 214, 216, 0.38);; padding: 5px;}
 #main>.editor>.tool>a{display: inline-block;width: 16px;height: 16px; position: relative;}
 #main>.editor>.tool>.previewTool{background: url('./image/preview-gray1.png');}
 #main>.editor>.tool>.previewTool:hover{background: url('./image/preview-gray2.png');}
 #main>.editor>.tool>.saveTool{background: url('./image/save-gray1.png');}
 #main>.editor>.tool>.saveTool:hover{background: url('./image/save-gray2.png');}
+#main>.editor>.tool>.count{display: block;color: #ada3a3;font-size: 12px;margin-top: 9px;}
+
 /* 保存弹窗 */
-#main>.editor .saveAlert{width: 300px;padding: 8px 16px; border: 1px solid rgba(0,0,0,.2);border-radius: 6px;
+#main>.editor .saveAlert{width: 300px;padding: 8px 16px;background: #fff;  border: 1px solid rgba(0,0,0,.2);border-radius: 6px;
     box-shadow: 0 3px 9px rgba(0,0,0,.5); position: absolute;left: -350px;top: 0; }
 #main>.editor .saveAlert label{font-size: 14px;color: #333;}
-#main>.editor .saveAlert>.inputBox{ margin-top: 8px;}
+#main>.editor .saveAlert>.inputBox{ margin-top: 8px; position: relative;}
 #main>.editor .saveAlert .inputDefault{padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;
+    width: 276px;height: 80px; resize: none; overflow: hidden;
     border: 1px solid #ccc; border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0,0,0,.075);}
 #main>.editor .saveAlert .inputDefault:focus{outline: none;border-color: #66afe9;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #67b168;}
-
+#main>.editor .saveAlert .prompt{width: 40px; position: absolute;bottom: 5px;right: 0;font-size: 12px;color: #66afe9;}
+#main>.editor .saveAlert .prompt>span{color: gray;}
+#main>.editor .saveAlert .textareaClearBtn{display: block; width: 21px;height: 21px;position: absolute;top: 3px;right: 3px; background: url('./image/clearBtn_1.png') no-repeat;}
+#main>.editor .saveAlert .textareaClearBtn:hover{background-image: url('./image/clearBtn_2.png');}
 #main>.editor .saveAlert>.btns{text-align: center; margin-top: 20px;}
 #main>.editor .saveAlert button{line-height: 1.42857143; border: 1px solid #ccc;border-radius: 4px;outline: none; 
     background: #fff;color: #333;cursor: pointer; padding:6px 12px;font-size: 14px;font-weight: 400;}
@@ -51,26 +61,42 @@ body,html{position: absolute;top: 0;left: 0; z-index: 10;}
 #main>.editor .saveAlert .hasErr{border:1px solid #a94442;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;}
 
 /* 行号 */
-#main>.editor>.linenum{width: 40px;min-height:200px;resize: none; overflow-y: hidden;font-size: 16px;line-height: 1.3em;font-family: "Consolas, 'Courier New', monospace";
-    text-align: center; color: #2b91af; border:none;outline: none; position: absolute;top: 10px;left: 40px;}
-#main>.editor>.linenum>li{line-height: 14px;font-size: 14px;}
-
-#main{background: red; height: 100%; overflow-y: scroll; }
-#main>.nodes{background: yellow;height: 100%; }
-#main>.nodes{height: 1200px; }
+#main>.editor>.linenum{  width: 40px;min-height:200px;resize: none; 
+    position: absolute;left: 0;top: 0;
+    overflow-y: hidden;font-size: 16px;line-height: 1.3em;font-family: "Consolas, 'Courier New', monospace";
+    text-align: center; color: #2b91af; border:none;outline: none;}
 
 
+/* nodes Start */
+#nodes{position: relative;}
+#nodes>.nodeList{position: absolute;top: 0;left: 0;}
+#nodes>.nodeList>div{display: inline-block;width: 30%; margin-right: 28px;}
+#nodes>.nodeList h3{font-size: 20px; color: #20515b; border-bottom: 1px solid #eee; 
+    padding-left: 26px; padding-bottom: 16px; background-position: 0px 4px !important;}
+#nodes>.nodeList>.local>h3{background: url('./image/local.png') no-repeat; }
+#nodes>.nodeList>.online>h3{background: url('./image/Online.png') no-repeat;}
+
+#nodes>.nodeList li{height: 24px;margin-bottom: 8px;}
+#nodes>.nodeList a{text-decoration: none; color: #20515b; font-size: 16px; }
+#nodes>.nodeList a:hover{text-decoration: underline;}
+
+#nodes>.previewBox{position: absolute;top: 0;left: 0; width: 100%;}
+#nodes>.previewBox>.close{display: block;width: 21px;height: 21px;position: absolute;top: 0;right: 0;background: url("./image/clearBtn_1.png");}
+#nodes>.previewBox>.close:hover{background: url('./image/clearBtn_2.png');}
 
 
 
-
-
+/* nodes End */
 
 /* Vue 进入离开动画 */
 .slide-fade-enter-active {transition: all .3s ease;}
 .slide-fade-leave-active {transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);}
 .slide-fade-enter, .slide-fade-leave-to {transform: translateX(10px);opacity: 0;}
 
+.slide-fade2-enter-active {transition: all .3s ease;}
+.slide-fade2-leave-active {transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);}
+.slide-fade2-enter, .slide-fade2-leave-to {transform: translateX(10px);opacity: 0;}
 
 
-
+.fade-enter-active, .fade-leave-active {transition: opacity .5s}
+.fade-enter, .fade-leave-to {opacity: 0}
